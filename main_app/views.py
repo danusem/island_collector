@@ -1,17 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
-class Island:
-    def __init__(self, name, country, description):
-        self.name = name
-        self.country = country
-        self.description = description
-
-islands = [
-    Island('Whitsundays', 'Australia', 'Stunning'),
-    Island('Bali', 'Indonesia', 'Exotic'),
-    Island('Kauai', 'USA', 'Rugged Cliffs'),
-]
+from .models import Island
 
 # Create your views here.
 def home(request):
@@ -21,4 +9,5 @@ def about(request):
     return render(request, 'about.html')
 
 def islands_index(request):
+    islands = Island.objects.all()
     return render(request, 'islands/index.html', {'islands': islands })
