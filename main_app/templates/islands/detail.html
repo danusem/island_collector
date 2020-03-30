@@ -7,5 +7,9 @@
             <p>Country: {{ island.country }}</p>
             <p>Description: {{ island.description }}</p>
         </div>
+        <div class="card-action">
+            <a href="{% url 'islands_update' island.id %}">Edit</a>
+            <a href="{% url 'islands_delete' island.id %}">Delete</a>
+        </div>
     </div>
 {% endblock %}
