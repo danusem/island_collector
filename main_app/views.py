@@ -11,3 +11,7 @@ def about(request):
 def islands_index(request):
     islands = Island.objects.all()
     return render(request, 'islands/index.html', {'islands': islands })
+
+def islands_detail(request, island_id):
+    island = Island.object.get(id=island_id)
+    return render(request, 'islands/detail.html', {'island': island })
