@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
+
 from .models import Island
 
 # Create your views here.
@@ -15,3 +17,7 @@ def islands_index(request):
 def islands_detail(request, island_id):
     island = Island.objects.get(id=island_id)
     return render(request, 'islands/detail.html', {'island': island })
+
+class IslandCreate(CreateView):
+    model = Island
+    fields = '__all__'
