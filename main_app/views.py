@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Island
 
@@ -21,3 +21,11 @@ def islands_detail(request, island_id):
 class IslandCreate(CreateView):
     model = Island
     fields = '__all__'
+
+class IslandUpdate(UpdateView):
+    model = Island
+    fields = ['country', 'description']
+
+class IslandDelete(DeleteView):
+    model = Island
+    success_url = '/islands/'
