@@ -1,6 +1,12 @@
 from django.db import models
 from django.urls import reverse
 
+FORECAST = (
+    ('S', 'Sunny'),
+    ('C', 'Cloudy'),
+    ('R', 'Rainy')
+)
+
 # Create your models here.
 class Island(models.Model):
     name = models.CharField(max_length=100)
@@ -12,3 +18,16 @@ class Island(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={ 'island_id': self.id })
+
+class Weather(models.Model):
+    date = models.DateField()
+    forecast = models.CharField(
+        max_length=1,
+        choices=FORECAST,
+        default=FORECAST[0][0]
+    )
+
+    island = models.ForeignKey(Island, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.get_forecast_display()} on {self.date}"
