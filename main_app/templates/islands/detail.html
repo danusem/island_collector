@@ -1,15 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">{{ island.name }}</span>
-            <p>Country: {{ island.country }}</p>
-            <p>Description: {{ island.description }}</p>
+    <h1>Island Details</h1>
+    <div class="row">
+        <div class="col s6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">{{ island.name }}</span>
+                    <p>Country: {{ island.country }}</p>
+                    <p>Description: {{ island.description }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="{% url 'islands_update' island.id %}">Edit</a>
+                    <a href="{% url 'islands_delete' island.id %}">Delete</a>
+                </div>
+            </div>
         </div>
-        <div class="card-action">
-            <a href="{% url 'islands_update' island.id %}">Edit</a>
-            <a href="{% url 'islands_delete' island.id %}">Delete</a>
+        <div class="col s6">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Forecast</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for weather in island.weather_set.all %}
+                        <tr>
+                            <td>{{ weather.date }}</td>
+                            <td>{{ weather.get_forecast_display }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
