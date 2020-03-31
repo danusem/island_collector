@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Island
+from .forms import WeatherForm
 
 # Create your views here.
 def home(request):
@@ -15,8 +16,16 @@ def islands_index(request):
     return render(request, 'islands/index.html', {'islands': islands })
 
 def islands_detail(request, island_id):
+
     island = Island.objects.get(id=island_id)
-    return render(request, 'islands/detail.html', {'island': island })
+    weather_form = WeatherForm()
+
+    return render(request, 'islands/detail.html',
+        {
+            'island': island,
+            'weather_form': weather_form
+        }
+    )
 
 class IslandCreate(CreateView):
     model = Island
