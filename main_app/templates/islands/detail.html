@@ -17,6 +17,11 @@
             </div>
         </div>
         <div class="col s6">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ weather_form }}
+                <input type="submit" class="btn" value="Add Forecast">
+            </form>
             <table class="striped">
                 <thead>
                     <tr>
