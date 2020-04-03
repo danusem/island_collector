@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 
 from .models import Island
 from .forms import WeatherForm
@@ -24,11 +25,11 @@ def islands_detail(request, island_id):
         {
             'island': island,
             'weather_form': weather_form,
-            'characteristics': characteristics_island_doesnt_have
         }
     )
 
 def add_forecast(request, island_id):
+    
     form = WeatherForm(request.POST)
 
     if form.is_valid():
@@ -38,9 +39,9 @@ def add_forecast(request, island_id):
 
     return redirect('detail', island_id=island_id)
 
-def assoc_characteristic(request, island_id, characteristic_id):
-    Island.objects.get(id=island_id).characteristics.add(characteristics_id)
-    return redirect('detail', island_id=island_id)
+# def assoc_characteristic(request, island_id, characteristic_id):
+#     Island.objects.get(id=island_id).characteristics.add(characteristics_id)
+#     return redirect('detail', island_id=island_id)
 
 class IslandCreate(CreateView):
     model = Island
