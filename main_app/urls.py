@@ -14,6 +14,6 @@ urlpatterns = [
     path('characteristics/<int:pk>/', views.CharacteristicDetail.as_view(), name='characteristics_detail'),
     path('characteristics/<int:pk>/update/', views.CharacteristicUpdate.as_view(), name='characteristics_update'),
     path('characteristics/<int:pk>/delete/', views.CharacteristicDelete.as_view(), name='characteristics_delete'),
-    path('characteristics/create/', views.characteristicCreate.as_view(), name='characteristics_create'),
+    path('characteristics/create/', views.CharacteristicCreate.as_view(), name='characteristics_create'),
     # path('islands/<int:island_id>/assoc_characteristic/<int:characteristic_id>/', views.assoc_characteristic, name='assoc_characteristic'),
 ]
