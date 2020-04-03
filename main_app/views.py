@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
-from .models import Island
+from .models import Island, Characteristic
 from .forms import WeatherForm
 
 # Create your views here.
