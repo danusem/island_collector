@@ -23,7 +23,8 @@ def islands_detail(request, island_id):
     return render(request, 'islands/detail.html',
         {
             'island': island,
-            'weather_form': weather_form
+            'weather_form': weather_form,
+            'characteristics': characteristics_island_doesnt_have
         }
     )
 
@@ -37,6 +38,10 @@ def add_forecast(request, island_id):
 
     return redirect('detail', island_id=island_id)
 
+def assoc_characteristic(request, island_id, characteristic_id):
+    Island.objects.get(id=island_id).characteristics.add(characteristics_id)
+    return redirect('detail', island_id=island_id)
+
 class IslandCreate(CreateView):
     model = Island
     fields = '__all__'
@@ -48,3 +53,23 @@ class IslandUpdate(UpdateView):
 class IslandDelete(DeleteView):
     model = Island
     success_url = '/islands/'
+
+class CharacteristicList(ListView):
+    model = Characteristic
+
+class CharacteristicDetail(DetailView):
+    model = Characteristic
+
+class CharacteristicCreate(CreateView):
+    model = Characteristic
+    fields = ['name']
+    success_url = '/characteristics/'
+
+class CharacteristicUpdate(UpdateView):
+    model = Characteristic
+    fields = ['name']
+    success_url = '/characteristics/'
+
+class CharacteristicDelete(DeleteView):
+    model = Characteristic
+    success_url = '/characteristics/'
