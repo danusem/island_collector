@@ -21,10 +21,13 @@ def islands_detail(request, island_id):
     island = Island.objects.get(id=island_id)
     weather_form = WeatherForm()
 
+    characteristics_island_doesnt_have = Characteristic.objects.exclude(id__in=island.characteristics.all().values_list('id'))
+
     return render(request, 'islands/detail.html',
         {
             'island': island,
             'weather_form': weather_form,
+            'characteristics': characteristics_island_doesnt_have
         }
     )
 
