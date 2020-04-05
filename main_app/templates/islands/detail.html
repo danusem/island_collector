@@ -70,7 +70,7 @@
                                <span>{{ characteristic.name }}</span>
                             </span>
                             <div class="card-action">
-                                <form action="{% url 'assoc_characteristic', island.id characteristic.id %}" method="post">
+                                <form action="{% url 'assoc_characteristic' island.id characteristic.id %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit" class="btn">Add</button>
                                 </form>
