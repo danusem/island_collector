@@ -60,6 +60,28 @@
                 <h5>No Characteristics</h5>
             {% endif %}
         </div>
+        <div class="col s6">
+            <h3>Available Characteristics</h3>
+            {% if characteristics.count %}
+                {% for characteristic in characteristics.all %}
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">
+                               <span>{{ characteristic.name }}</span>
+                            </span>
+                            <div class="card-action">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <h5>{{ island.name }} Already has All Characteristics Available</h5>
+            {% endif %}
+        </div>
     </div>
     <script>
 
