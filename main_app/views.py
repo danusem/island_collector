@@ -42,9 +42,9 @@ def add_forecast(request, island_id):
 
     return redirect('detail', island_id=island_id)
 
-# def assoc_characteristic(request, island_id, characteristic_id):
-#     Island.objects.get(id=island_id).characteristics.add(characteristics_id)
-#     return redirect('detail', island_id=island_id)
+def assoc_characteristic(request, island_id, characteristic_id):
+    Island.objects.get(id=island_id).characteristics.add(characteristic_id)
+    return redirect('detail', island_id=island_id)
 
 class IslandCreate(CreateView):
     model = Island
