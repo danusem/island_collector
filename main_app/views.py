@@ -48,7 +48,7 @@ def assoc_characteristic(request, island_id, characteristic_id):
 
 class IslandCreate(CreateView):
     model = Island
-    fields = '__all__'
+    fields = ['name', 'country', 'description']
 
 class IslandUpdate(UpdateView):
     model = Island
