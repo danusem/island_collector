@@ -15,6 +15,11 @@
                     <a href="{% url 'islands_delete' island.id %}">Delete</a>
                 </div>
             </div>
+            {% for photo in island.photo_set.all %}
+                <img class="responsive-img card-panel" src="{{ photo.url }}" alt="{{ island.name }}">
+            {% empty %}
+                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+            {% endfor %}
         </div>
         <div class="col s6">
             <form action="{% url 'add_forecast' island.id %}" method="post">
