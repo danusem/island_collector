@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from datetime import date
 
+from django.contrib.auth.models import User
+
 FORECAST = (
     ('S', 'Sunny'),
     ('C', 'Cloudy'),
@@ -21,6 +23,7 @@ class Island(models.Model):
     country = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     characteristics = models.ManyToManyField(Characteristic)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
