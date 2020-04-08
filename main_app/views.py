@@ -72,6 +72,10 @@ class IslandCreate(CreateView):
     model = Island
     fields = ['name', 'country', 'description']
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 class IslandUpdate(UpdateView):
     model = Island
     fields = ['country', 'description']
