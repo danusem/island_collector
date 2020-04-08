@@ -17,4 +17,5 @@ urlpatterns = [
     path('characteristics/create/', views.CharacteristicCreate.as_view(), name='characteristics_create'),
     path('islands/<int:island_id>/assoc_characteristic/<int:characteristic_id>/', views.assoc_characteristic, name='assoc_characteristic'),
     path('islands/<int:island_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
