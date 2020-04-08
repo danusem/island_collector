@@ -6,6 +6,7 @@ from .models import Island, Characteristic, Photo
 from .forms import WeatherForm
 
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 import uuid 
 import boto3
@@ -15,17 +16,22 @@ BUCKET = 'islandcollector'
 
 # Create your views here.
 def signup(request):
-    
+    error_message = ''
+
     if request.method == 'POST':
-        pass
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid Sign Up - Try Again'
 
     form = UserCreationForm()
-
-    context = {'form': form}
-
+    context = {'form': form, 'error': error_message }
     return render(request, 'registration/signup.html', context)
-
-
 
 def home(request):
     return render(request, 'home.html')
