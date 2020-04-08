@@ -8,6 +8,7 @@ from .forms import WeatherForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 import uuid 
 import boto3
@@ -95,7 +96,7 @@ def add_photo(request, island_id):
             print('An error has occurred uploading file to s3')
     return redirect('detail', island_id=island_id)
 
-class IslandCreate(CreateView):
+class IslandCreate(LoginRequiredMixin, CreateView):
     model = Island
     fields = ['name', 'country', 'description']
 
@@ -103,30 +104,30 @@ class IslandCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class IslandUpdate(UpdateView):
+class IslandUpdate(LoginRequiredMixin, UpdateView):
     model = Island
     fields = ['country', 'description']
 
-class IslandDelete(DeleteView):
+class IslandDelete(LoginRequiredMixin, DeleteView):
     model = Island
     success_url = '/islands/'
 
-class CharacteristicList(ListView):
+class CharacteristicList(LoginRequiredMixin, ListView):
     model = Characteristic
 
-class CharacteristicDetail(DetailView):
+class CharacteristicDetail(LoginRequiredMixin, DetailView):
     model = Characteristic
 
-class CharacteristicCreate(CreateView):
-    model = Characteristic
-    fields = ['name']
-    success_url = '/characteristics/'
-
-class CharacteristicUpdate(UpdateView):
+class CharacteristicCreate(LoginRequiredMixin, CreateView):
     model = Characteristic
     fields = ['name']
     success_url = '/characteristics/'
 
-class CharacteristicDelete(DeleteView):
+class CharacteristicUpdate(LoginRequiredMixin, UpdateView):
+    model = Characteristic
+    fields = ['name']
+    success_url = '/characteristics/'
+
+class CharacteristicDelete(LoginRequiredMixin, DeleteView):
     model = Characteristic
     success_url = '/characteristics/'
