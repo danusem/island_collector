@@ -5,6 +5,8 @@ from django.views.generic import ListView, DetailView
 from .models import Island, Characteristic, Photo
 from .forms import WeatherForm
 
+from django.contrib.auth.forms import UserCreationForm
+
 import uuid 
 import boto3
 
@@ -12,6 +14,19 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'islandcollector'
 
 # Create your views here.
+def signup(request):
+    
+    if request.method == 'POST':
+        pass
+
+    form = UserCreationForm()
+
+    context = {'form': form}
+
+    return render(request, 'registration/signup.html', context)
+
+
+
 def home(request):
     return render(request, 'home.html')
 
