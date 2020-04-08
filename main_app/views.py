@@ -40,7 +40,7 @@ def about(request):
     return render(request, 'about.html')
 
 def islands_index(request):
-    islands = Island.objects.all()
+    islands = Island.objects.filter(user=request.user)
     return render(request, 'islands/index.html', {'islands': islands })
 
 def islands_detail(request, island_id):
