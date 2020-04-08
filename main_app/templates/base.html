@@ -20,10 +20,15 @@
         </ul>
         <ul class="right">
           <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'islands_create' %}">Add an Island</a></li>
-          <li><a href="{% url 'index' %}">View All Islands</a></li>
-          <li><a href="{% url 'characteristics_index' %}">View All Characteristics</a></li>
-          <li><a href="{% url 'characteristics_create' %}">Add a Characteristic</a></li>
+          {% if user.is_authenicated %}
+            <li><a href="{% url 'islands_create' %}">Add an Island</a></li>
+            <li><a href="{% url 'index' %}">View All Islands</a></li>
+            <li><a href="{% url 'characteristics_index' %}">View All Characteristics</a></li>
+            <li><a href="{% url 'characteristics_create' %}">Add a Characteristic</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
