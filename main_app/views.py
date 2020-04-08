@@ -7,6 +7,7 @@ from .forms import WeatherForm
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 import uuid 
 import boto3
@@ -39,10 +40,12 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def islands_index(request):
     islands = Island.objects.filter(user=request.user)
     return render(request, 'islands/index.html', {'islands': islands })
 
+@login_required
 def islands_detail(request, island_id):
 
     island = Island.objects.get(id=island_id)
@@ -58,6 +61,7 @@ def islands_detail(request, island_id):
         }
     )
 
+@login_required
 def add_forecast(request, island_id):
     
     form = WeatherForm(request.POST)
@@ -69,10 +73,12 @@ def add_forecast(request, island_id):
 
     return redirect('detail', island_id=island_id)
 
+@login_required
 def assoc_characteristic(request, island_id, characteristic_id):
     Island.objects.get(id=island_id).characteristics.add(characteristic_id)
     return redirect('detail', island_id=island_id)
 
+@login_required
 def add_photo(request, island_id):
     photo_file = request.FILES.get('photo-file', None)
 
